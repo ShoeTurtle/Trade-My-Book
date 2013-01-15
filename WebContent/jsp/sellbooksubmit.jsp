@@ -1,0 +1,118 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.io.*" %> 
+<%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*" %>
+<%@ page import="java.text.*,java.util.*" %>
+
+<%@ page import="org.apache.commons.fileupload.*" %>
+<%@ page import="org.apache.commons.fileupload.disk.*" %>
+<%@ page import="org.apache.commons.fileupload.servlet.*" %>
+<%@ page import="org.apache.commons.io.output.*" %>
+
+<% 
+String connectionURL = "jdbc:mysql://localhost:3306/trademybook?user=root@localhost";
+Connection connection = null;
+Statement statement = null;
+ResultSet rs = null;
+
+//Database connection
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+connection = DriverManager.getConnection(connectionURL,"root","dakgator123");
+
+statement = connection.createStatement();
+
+String title, isbn, author, publisher, edition, sellerprice, marketprice, condition, 
+	category, subcategory, filename, userID, description;
+
+	//Once the Data is successfully entered into the database
+	//retrieve the book id and use it as a file name to save the picture
+
+	File file;  
+	int maxFileSize = 5000 * 1024;
+   	int maxMemSize = 5000 * 1024;
+   	
+   	ServletContext context = pageContext.getServletContext();
+   	String filePath = context.getInitParameter("file-upload");
+   	
+   	DiskFileItemFactory factory = new DiskFileItemFactory();
+   	factory.setSizeThreshold(maxMemSize);
+   	
+   	ServletFileUpload upload = new ServletFileUpload(factory);
+   	upload.setFileSizeMax(maxFileSize);
+   	
+   	try {
+   		List<FileItem> items = upload.parseRequest(request);
+   		String type;
+   		   		
+   		title = items.get(0).getString();
+   		isbn = items.get(1).getString();
+   		author = items.get(2).getString();
+   		publisher = items.get(3).getString();
+   		edition = items.get(4).getString();
+   		sellerprice = items.get(5).getString();
+   		marketprice = items.get(6).getString();
+   		condition = items.get(7).getString();
+   		category = items.get(8).getString();
+   		subcategory = items.get(9).getString();	
+   		userID = items.get(11).getString().trim();
+   		description = items.get(12).getString();  		
+   		
+   		
+   		FileItem myItem = items.get(10);
+   		
+   		String fieldName = myItem.getFieldName();
+   		String fileName = myItem.getName();
+        
+   		  		
+   		boolean isInMemory = myItem.isInMemory();
+   		long sizeInBytes = myItem.getSize();
+        
+   		file = new File(filePath + "/" + fileName);
+   		
+   		//out.print(sizeInBytes);
+   		//out.print(isInMemory);
+   		//out.print(fileName);
+   		//out.print(fieldName);
+   		
+   		if(isInMemory) {
+   			myItem.write(file);
+   			//out.print("Test");
+   		}
+   		else {
+   			//out.print("not in memory");
+   			fileName = "NIL";
+   		}
+   		   		
+   	
+   		//Writing into the SQL Database//
+   		   		
+   		//DateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+   	   	//String now = fmt.format(new java.util.Date());
+   		
+	  		
+   		String insert = "INSERT INTO books(Category, SubCategory, Title, ISBN, Author, Publisher, Edition, SellerPrice, MarketPrice, Condtn, image, UserID, Description, uploadDate)" +
+        "VALUES ('" + category + "','" + subcategory + "','" + title + "','" + isbn + "','" + author + "','" + publisher + "','" +
+					edition + "','" + sellerprice + "','" + marketprice + "','" + condition + "','" + fileName + "','" + userID + 
+					"','" + description + "',CURDATE())";
+
+		
+   		PreparedStatement ps = connection.prepareStatement(insert);
+		ps.executeUpdate();
+		connection.close();		
+		
+		//out.print(insert);
+   	}
+   	catch(Exception ex) {
+   		out.print(ex.toString());
+   	}   
+%>
+
+<%
+	String redirectURL = "http://localhost:8080/trademybook.in/index.html";
+	response.sendRedirect(redirectURL);
+%>

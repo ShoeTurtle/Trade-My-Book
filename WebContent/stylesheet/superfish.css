@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/********************************************************************************************************************************************************************************/
+/* menu */
+#menu {
+	background: url(../images/tail-menu.gif) left top repeat-x #373334;
+	margin-bottom:10px;
+	float:right;
+	width:750px;
+	z-index:1;
+	
+}
+
+/*#menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	
+}
+
+#menu > ul {
+	float:left;
+	width:750px;
+}
+#menu > ul > li.last{}
+#menu > ul > li {
+	float: left;
+	z-index: 20;
+	background: url('../image/border-menu.gif') right top no-repeat;
+	padding:0px 2px 0px 0px;
+	position:relative;
+	width:161px;
+	text-align:center;
+}
+
+#menu > ul > li > a {
+	font-size: 14px;
+	color: #ffffff;
+	line-height: 13px;
+	text-decoration: none;
+	display: block;
+	padding: 12px 5px 11px 5px;
+	z-index: 6;
+	position: relative;
+	background:url(../image/menu-a.gif) left -1000px repeat-x;
+}
+#menu > ul > li.cat_4 > a {
+	padding-left:20px;
+	padding-right:20px;
+}
+#menu > ul > li.cat_6 {
+	width:165px;
+	padding-right:0;
+	background:none;
+}
+#menu > ul > li > a:hover, #menu > ul > li.sfHover > a, #menu > ul > li.active > a   { background-position:0 0; color:#000;}
+#menu > ul > li > ul {
+	display: none;
+	position: absolute; 
+	z-index: 5;
+	padding:16px 0 5px 0;
+	background:#2c2929;
+	left:0px;
+	top:49px;
+	width:162px;
+	margin:0 !important;
+	border-radius:0;
+}
+#menu > ul > li:hover > div {
+	display: table;
+}
+#menu > ul > li ul + ul {
+	padding-left: 0px;
+	min-height:162px;
+}
+#menu > ul  li.last { border:none;}
+#menu > ul > li ul > li > a {
+	text-decoration: none;
+	padding:0px 0px 0px 19px;
+	color: #9f9e9e;
+	display: block;
+	white-space: nowrap;
+}
+#menu > ul > li ul > li.last > a{ border:none;}
+#menu > ul > li ul > li > a:hover, #menu > ul > li ul > li.active > a, #menu > ul > li ul > li.sfHover > a {
+	color:#fff; background-position:0 0;
+}
+#menu > ul > li > ul > ul > li:last-child > a { border:none}
+#menu > ul > li > ul > ul > li {
+}
+#menu > ul > li > ul > ul > li:hover, #menu > ul > li > ul > ul > li.active { background-position:0 0;}
+#menu > ul > li > ul > ul  li {}
+#menu > ul > li > ul > ul > li.last { border:none;}  
+#menu > ul > li > ul > ul > li  a {
+	color: #9f9e9e;
+	font-size:12px;
+	text-transform:none;
+	line-height:24px;
+	text-align:left;
+	background:url(../image/menu-a-a.gif) 0 -1000px repeat-x;
+}
+#menu ul > ul > li ul  { 
+	position:absolute;
+	left:162px;
+	top:64px;
+	background:#2c2929; 
+	width:162px;
+} 
+#menu ul > ul > li ul li a {
+	color: #9f9e9e;
+	font-size:12px;
+	text-transform:none;
+	line-height:25px;
+}
+#menu ul > ul > li ul li a:hover, #menu ul > ul > li ul li a.active { color:#FFFFFF; background-position:0 0;}
+#menu  ul li img {
+ position:absolute;
+ background:#fff;
+ display:none;
+ color:#ddd;
+ border-left:1px solid #000;
+ width:161px;
+ height:161px;
+ z-index:99;
+ right:1px; top:1px;
+ 
+}
+#menu  ul li li:hover img { display:none;} 
+*/
